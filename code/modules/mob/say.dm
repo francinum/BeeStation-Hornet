@@ -101,15 +101,29 @@
   * * MODE_SING (Singing)
   * * MODE_HEADSET (Common radio channel)
   * * A department radio (lots of values here)
+  *
+  * MODE KEYS
+  * #  - WHISPER
+  * %  - SING
+  * ;  - HEADSET DEFAULT
+  * ?  - SPECIAL CHANNELS
+  * :x - USE PERSONAL RADIOS
+  * ,x - USE STATIC RADIO SPECIAL CHANNELS
   */
+
 /mob/proc/get_message_mode(message)
 	var/key = message[1]
-	if(key == "#")
-		return MODE_WHISPER
-	else if(key == "%")
-		return MODE_SING
-	else if(key == ";")
-		return MODE_HEADSET
-	else if((length(message) > (length(key) + 1)) && (key in GLOB.department_radio_prefixes))
-		var/key_symbol = lowertext(message[length(key) + 1])
-		return GLOB.department_radio_keys[key_symbol]
+	switch(message[1])
+		if("#")
+			return MODE_WHISPER
+		if("%")
+			return MODE_SING
+		if(";")
+			return MODE_HEADSET
+		if("?")
+			return MODE_SAYMODE			//MCP
+		if(":")
+			return MODE_HEADSET_SPECIAL	//MCP
+		if(",")
+			return MODE_STATIC_SPECIAL	//MCP
+#warn TODO SET A SAYMODE THAT MAKES IT SCREAM INTO A RADIO HERE

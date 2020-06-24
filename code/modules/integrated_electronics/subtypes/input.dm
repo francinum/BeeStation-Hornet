@@ -1350,11 +1350,11 @@
 
 /obj/item/integrated_circuit/input/tcomm_interceptor/Initialize()
 	. = ..()
-	receiver = new(src)
-	receiver.holder = src
-
+//	receiver = new(src)
+//	receiver.holder = src
+#warn dummied out the TCOM intercept IC unit
 /obj/item/integrated_circuit/input/tcomm_interceptor/Destroy()
-	qdel(receiver)
+//	qdel(receiver)
 	GLOB.ic_jammers -= src
 	..()
 

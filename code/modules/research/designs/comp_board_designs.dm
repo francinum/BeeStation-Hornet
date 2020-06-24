@@ -239,7 +239,8 @@
 	build_path = /obj/item/circuitboard/computer/mining
 	category = list("Computer Boards")
 	departmental_flags = DEPARTMENTAL_FLAG_CARGO | DEPARTMENTAL_FLAG_SECURITY
-
+	#warn Commented out circuitboards
+/*
 /datum/design/board/comm_monitor
 	name = "Computer Design (Telecommunications Monitoring Console)"
 	desc = "Allows for the construction of circuit boards used to build a telecommunications monitor."
@@ -263,7 +264,7 @@
 	build_path = /obj/item/circuitboard/computer/message_monitor
 	category = list("Computer Boards")
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING
-
+*/
 /datum/design/board/aifixer
 	name = "Computer Design (AI Integrity Restorer)"
 	desc = "Allows for the construction of circuit boards used to build an AI Integrity Restorer."

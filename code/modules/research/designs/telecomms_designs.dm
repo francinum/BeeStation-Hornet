@@ -1,6 +1,7 @@
 ///////////////////////////////////
 /////Subspace Telecomms////////////
 ///////////////////////////////////
+/*
 
 /datum/design/board/subspace_receiver
 	name = "Machine Design (Subspace Receiver)"
@@ -66,3 +67,4 @@
 	build_path = /obj/item/circuitboard/machine/telecomms/broadcaster
 	category = list("Subspace Telecomms")
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SCIENCE
+*/

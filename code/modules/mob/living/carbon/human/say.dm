@@ -52,7 +52,7 @@
 		if(dongle.translate_binary)
 			return TRUE
 
-/mob/living/carbon/human/radio(message, message_mode, list/spans, language)
+/mob/living/carbon/human/radio(message, message_mode, list/spans, language, radio_prefix)
 	. = ..()
 	if(. != 0)
 		return .
@@ -63,9 +63,9 @@
 				ears.talk_into(src, message, , spans, language)
 			return ITALICS | REDUCE_RANGE
 
-		if(MODE_DEPARTMENT)
+		if(MODE_HEADSET_SPECIAL)
 			if (ears)
-				ears.talk_into(src, message, message_mode, spans, language)
+				ears.talk_into(src, message, message_mode, spans, language, radio_prefix)
 			return ITALICS | REDUCE_RANGE
 
 	if(message_mode in GLOB.radiochannels)

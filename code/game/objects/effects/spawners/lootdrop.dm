@@ -247,7 +247,7 @@
 		/mob/living/simple_animal/hostile/retaliate/spaceman = 2,
 		/obj/effect/mob_spawn/human/corpse/assistant/brainrot_infection = 1,
 		/mob/living/simple_animal/hostile/retaliate/frog = 2)
-	
+
 /obj/effect/spawner/lootdrop/costume
 	name = "random costume spawner"
 
@@ -377,10 +377,10 @@
 				/obj/item/circuitboard/computer/stationalert,
 				/obj/item/circuitboard/computer/powermonitor
 				)
-
+#warn Commented out circuitboards
 /obj/effect/spawner/lootdrop/techstorage/tcomms
 	name = "tcomms circuit board spawner"
-	loot = list(
+/*	loot = list(
 				/obj/item/circuitboard/computer/message_monitor,
 				/obj/item/circuitboard/machine/telecomms/broadcaster,
 				/obj/item/circuitboard/machine/telecomms/bus,
@@ -391,7 +391,7 @@
 				/obj/item/circuitboard/computer/comm_server,
 				/obj/item/circuitboard/computer/comm_monitor
 				)
-
+*/
 /obj/effect/spawner/lootdrop/techstorage/medical
 	name = "medical circuit board spawner"
 	loot = list(

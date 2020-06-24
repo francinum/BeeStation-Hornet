@@ -33,3 +33,35 @@ SUBSYSTEM_DEF(radio)
 	if(!frequency)
 		frequencies[f_text] = frequency = new(new_frequency)
 	return frequency
+
+/*
+	So here's how this is supposed to work
+
+
+	Frequency Banding
+
+	Special: 0-20
+	Do no special processing, act like legacy system. Immediately and blindly broadcast to client radios.COMSIG_RADIO_NEW_FREQUENCY
+
+	LF: 20.1 - 89.9
+	"Long Range" communications, (primarily an NSV concept) Implimented here as
+
+	RF: 90.1 - 199.9
+	Broadcasts to the current zone. 'zone' being defined by `ZTRAIT_COMMZONE`
+
+	HF: 200.1 - 299.9
+	Broadcasts to the current Z-Level strictly.
+
+	Subspace: 300.1+
+	Not technically valid radio channels. Bands at this frequency are too tight to be used over the air.
+	Used for zone trunking and ultra-secure radios.
+
+
+	Physical Component
+
+	Encryption keys are now Radio Transcievers, all-in-one boxes capable of handling radio signals directly.
+	9 times out of 10 though, you'll be interacting with them as a human, and through a radio.
+	To this end, obj/item/radio has been stripped back to function as a middle manager for various radio keys.
+	[Writing this before I've done most of the work, but hopefully it should...] Saycode will forward the prefix attempted to the radio itself
+	Keys will present their extension to the headset which will select based on the valid and accessible prefixes.
+*/

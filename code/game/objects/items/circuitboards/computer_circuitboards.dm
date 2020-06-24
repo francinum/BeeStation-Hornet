@@ -5,11 +5,12 @@
 /obj/item/circuitboard/computer/launchpad_console
 	name = "Launchpad Control Console (Computer Board)"
 	build_path = /obj/machinery/computer/launchpad
-
+#warn commented out computer board
+/*
 /obj/item/circuitboard/computer/message_monitor
 	name = "Message Monitor (Computer Board)"
 	build_path = /obj/machinery/computer/message_monitor
-
+*/
 /obj/item/circuitboard/computer/security
 	name = "Security Cameras (Computer Board)"
 	build_path = /obj/machinery/computer/security
@@ -292,7 +293,8 @@
 /obj/item/circuitboard/computer/research
 	name = "Research Monitor (Computer Board)"
 	build_path = /obj/machinery/computer/security/research
-
+#warn commented out computer board
+/*
 /obj/item/circuitboard/computer/comm_monitor
 	name = "Telecommunications Monitor (Computer Board)"
 	build_path = /obj/machinery/computer/telecomms/monitor
@@ -300,7 +302,7 @@
 /obj/item/circuitboard/computer/comm_server
 	name = "Telecommunications Server Monitor (Computer Board)"
 	build_path = /obj/machinery/computer/telecomms/server
-
+*/
 /obj/item/circuitboard/computer/labor_shuttle
 	name = "Labor Shuttle (Computer Board)"
 	build_path = /obj/machinery/computer/shuttle/labor

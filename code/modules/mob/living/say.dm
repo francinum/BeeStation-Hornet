@@ -20,10 +20,6 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	RADIO_KEY_SYNDICATE = RADIO_CHANNEL_SYNDICATE,
 	RADIO_KEY_CENTCOM = RADIO_CHANNEL_CENTCOM,
 
-	// Admin
-	MODE_KEY_ADMIN = MODE_ADMIN,
-	MODE_KEY_DEADMIN = MODE_DEADMIN,
-
 	// Misc
 	RADIO_KEY_AI_PRIVATE = RADIO_CHANNEL_AI_PRIVATE, // AI Upload channel
 	MODE_KEY_VOCALCORDS = MODE_VOCALCORDS,		// vocal cords, used by Voice of God
@@ -49,10 +45,6 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	// Faction
 	"å" = RADIO_CHANNEL_SYNDICATE,
 	"í" = RADIO_CHANNEL_CENTCOM,
-
-	// Admin
-	"ç" = MODE_ADMIN,
-	"â" = MODE_ADMIN,
 
 	// Misc
 	"ù" = RADIO_CHANNEL_AI_PRIVATE,
@@ -107,22 +99,21 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	var/message_mode = get_message_mode(message)
 	var/original_message = message
 	var/in_critical = InCritical()
+	var/radio_prefix
 
 	if(one_character_prefix[message_mode])
 		message = copytext_char(message, 2)
+	else if(message_mode == MODE_SAYMODE)
+		if(saymode)
+			message_mode = saymode.mode
+		else
+			message_mode = MODE_WHISPER //They don't have a valid extended saymode, be kind and make it whisper so they don't make a fool of themselves.
+		message = copytext_char(message, 3)
 	else if(message_mode || saymode)
+		radio_prefix = message[2]
 		message = copytext_char(message, 3)
 	message = trim_left(message)
 
-	if(message_mode == MODE_ADMIN)
-		if(client)
-			client.cmd_admin_say(message)
-		return
-
-	if(message_mode == MODE_DEADMIN)
-		if(client)
-			client.dsay(message)
-		return
 
 	if(stat == DEAD)
 		say_dead(original_message)
@@ -206,7 +197,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		spans |= SPAN_SINGING
 		message = "[randomnote] [message] [randomnote]"
 
-	var/radio_return = radio(message, message_mode, spans, language)
+	var/radio_return = radio(message, message_mode, spans, language, radio_prefix)
 	if(radio_return & ITALICS)
 		spans |= SPAN_ITALICS
 	if(radio_return & REDUCE_RANGE)
