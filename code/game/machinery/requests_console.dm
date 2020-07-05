@@ -313,7 +313,7 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 				radio_freq = FREQ_SECURITY
 			if("cargobay" || "mining")
 				radio_freq = FREQ_SUPPLY
-
+	/*
 		var/datum/signal/subspace/messaging/rc/signal = new(src, list(
 			"sender" = department,
 			"rec_dpt" = to_department,
@@ -325,8 +325,8 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 			"notify_freq" = radio_freq
 		))
 		signal.send_to_receivers()
-
 		screen = signal.data["done"] ? REQ_SCREEN_SENT : REQ_SCREEN_ERR
+	*/#warn COMMENTED OUT REQUEST CONSOLE CODE
 
 	//Handle screen switching
 	if(href_list["setScreen"])

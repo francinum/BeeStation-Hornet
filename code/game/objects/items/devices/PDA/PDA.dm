@@ -639,6 +639,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	return t
 
 /obj/item/pda/proc/send_message(mob/living/user, list/obj/item/pda/targets, everyone)
+	/*
 	var/message = msg_input(user)
 	if(!message || !targets.len)
 		return
@@ -651,6 +652,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	for (var/obj/item/pda/P in targets)
 		if (P.owner && P.ownjob)  // != src is checked by the UI
 			string_targets += "[P.owner] ([P.ownjob])"
+
 	for (var/obj/machinery/computer/message_monitor/M in targets)
 		// In case of "Reply" to a message from a console, this will make the
 		// message be logged successfully. If the console is impersonating
@@ -699,8 +701,10 @@ GLOBAL_LIST_EMPTY(PDAs)
 	last_text = world.time
 	if (everyone)
 		last_everyone = world.time
+	*/ #warn COMMENTED OUT PDA SEND CODE
 
 /obj/item/pda/proc/receive_message(datum/signal/subspace/messaging/pda/signal)
+/*
 	tnote += "<i><b>&larr; From <a href='byond://?src=[REF(src)];choice=Message;target=[REF(signal.source)]'>[signal.data["name"]]</a> ([signal.data["job"]]):</b></i><br>[signal.format_message()]<br>"
 
 	if (!silent)
@@ -733,7 +737,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 	update_icon()
 	add_overlay(icon_alert)
-
+*/ #warn COMMENTED OUT PDA RECEIVE CODE
 /obj/item/pda/proc/send_to_all(mob/living/U)
 	if (last_everyone && world.time < last_everyone + PDA_SPAM_DELAY)
 		to_chat(U,"<span class='warning'>Send To All function is still on cooldown.")

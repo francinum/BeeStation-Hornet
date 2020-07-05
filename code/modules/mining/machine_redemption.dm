@@ -63,7 +63,7 @@
 	var/datum/component/material_container/mat_container = materials.mat_container
 	if (!mat_container)
 		return
-		
+
 	if(O.refined_type == null)
 		return
 
@@ -140,7 +140,7 @@
 
 	if(!has_minerals)
 		return
-
+	/*
 	var/datum/signal/subspace/messaging/rc/signal = new(src, list(
 		"ore_update" = TRUE,
 		"sender" = "Ore Redemption Machine",
@@ -149,7 +149,7 @@
 		"priority" = REQ_NORMAL_MESSAGE_PRIORITY
 	))
 	signal.send_to_receivers()
-
+	*/#warn COMMENTED OUT ORE REDEMPTION RC NOTIFICATION
 /obj/machinery/mineral/ore_redemption/process()
 	if(!materials.mat_container || panel_open || !powered())
 		return
@@ -187,13 +187,13 @@
 		if(user.transferItemToLoc(W, src))
 			inserted_disk = W
 			return TRUE
-			
+
 	var/obj/item/stack/ore/O = W
 	if(istype(O))
 		if(O.refined_type == null)
 			to_chat(user, "<span class='notice'>[O] has already been refined!</span>")
 			return
-		
+
 	return ..()
 
 /obj/machinery/mineral/ore_redemption/AltClick(mob/living/user)
@@ -293,7 +293,7 @@
 					desired = input("How many sheets?", "How many sheets would you like to smelt?", 1) as null|num
 
 				var/sheets_to_remove = round(min(desired,50,stored_amount))
-				
+
 				var/count = mat_container.retrieve_sheets(sheets_to_remove, mat, get_step(src, output_dir))
 				var/list/mats = list()
 				mats[mat] = MINERAL_MATERIAL_AMOUNT

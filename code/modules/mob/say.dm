@@ -112,7 +112,7 @@
   */
 
 /mob/proc/get_message_mode(message)
-	var/key = message[1]
+//	var/key = message[1] //hopefully we can just inline this without complaint
 	switch(message[1])
 		if("#")
 			return MODE_WHISPER
