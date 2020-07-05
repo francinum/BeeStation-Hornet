@@ -207,9 +207,11 @@
 					say("[available_channels.len ? "[pick(available_channels)] " : null]BAWWWWWK LEAVE THE HEADSET BAWKKKKK!")
 				ears.forceMove(drop_location())
 				ears = null
+				/*
 				for(var/possible_phrase in speak)
 					if(copytext_char(possible_phrase, 2, 3) in GLOB.department_radio_keys)
 						possible_phrase = copytext_char(possible_phrase, 3)
+				*/ #warn commented out poly message safety checks
 
 	//Adding things to inventory
 	else if(href_list["add_inv"])

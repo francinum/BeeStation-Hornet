@@ -60,19 +60,19 @@
 	switch(message_mode)
 		if(MODE_HEADSET)
 			if (ears)
-				ears.talk_into(src, message, , spans, language)
+				ears.talk_into(src, message, message_mode, spans, language)
 			return ITALICS | REDUCE_RANGE
 
 		if(MODE_HEADSET_SPECIAL)
 			if (ears)
 				ears.talk_into(src, message, message_mode, spans, language, radio_prefix)
 			return ITALICS | REDUCE_RANGE
-
+/*
 	if(message_mode in GLOB.radiochannels)
 		if(ears)
 			ears.talk_into(src, message, message_mode, spans, language)
 			return ITALICS | REDUCE_RANGE
-
+*/ //This should hopefully not be needed anymore
 	return 0
 
 /mob/living/carbon/human/get_alt_name()

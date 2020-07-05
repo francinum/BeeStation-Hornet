@@ -1,5 +1,5 @@
 GLOBAL_LIST_INIT(department_radio_prefixes, list(":", "."))
-
+/*
 GLOBAL_LIST_INIT(department_radio_keys, list(
 	// Location
 	MODE_KEY_R_HAND = MODE_R_HAND,
@@ -50,7 +50,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	"ù" = RADIO_CHANNEL_AI_PRIVATE,
 	"÷" = MODE_VOCALCORDS
 ))
-
+*/
 /mob/living/proc/Ellipsis(original_msg, chance = 50, keep_words)
 	if(chance <= 0)
 		return "..."
@@ -101,6 +101,12 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	var/in_critical = InCritical()
 	var/radio_prefix
 
+	message_admins("PREPARSE STAGE")
+	message_admins("Unsanitized Message: [message]")
+	message_admins("Message Mode: [message_mode ? message_mode : "NULL"]")
+	message_admins("Saymode: [saymode ? saymode.mode : "NULL"]")
+	message_admins("-----")
+
 	if(one_character_prefix[message_mode])
 		message = copytext_char(message, 2)
 	else if(message_mode == MODE_SAYMODE)
@@ -113,6 +119,11 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		radio_prefix = message[2]
 		message = copytext_char(message, 3)
 	message = trim_left(message)
+
+	message_admins("POSTPARSE STAGE")
+	message_admins("Message: [message]")
+	message_admins("Message Mode: [message_mode ? message_mode : "NULL"]")
+	message_admins("Saymode: [saymode ? saymode.mode : "NULL"]")
 
 
 	if(stat == DEAD)
@@ -340,7 +351,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 
 /mob/living/proc/get_key(message)
 	var/key = message[1]
-	if(key in GLOB.department_radio_prefixes)
+	if(key == "?")//Weld this to the special saymode check
 		return lowertext(message[1 + length(key)])
 
 /mob/living/proc/get_message_language(message)

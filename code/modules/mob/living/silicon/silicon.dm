@@ -344,7 +344,7 @@
 	if(!radio)
 		to_chat(src, "Radio not detected.")
 		return
-
+/*
 	//Ask the user to pick a channel from what it has available.
 	var/Autochan = input("Select a channel:") as null|anything in list("Default","None") + radio.channels
 
@@ -362,6 +362,7 @@
 				break
 
 	to_chat(src, "<span class='notice'>Automatic announcements [Autochan == "None" ? "will not use the radio." : "set to [Autochan]."]</span>")
+*/ #warn fuck ai mains (commented out auto announce radio selection)
 
 /mob/living/silicon/put_in_hand_check() // This check is for borgs being able to receive items, not put them in others' hands.
 	return 0

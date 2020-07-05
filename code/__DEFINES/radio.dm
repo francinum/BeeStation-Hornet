@@ -119,3 +119,9 @@
 #define NETWORK_PROTOCOL_VOICE 		1
 #define NETWORK_PROTOCOL_PDA		2
 #define NETWORK_PROTOCOL_RC			3
+
+#define RADIO_BAND_SPECIAL			-1 // Special Band (Broadcast to all tuned rec with no questions asked)
+#define RADIO_BAND_LF				0
+#define RADIO_BAND_RF				1
+#define RADIO_BAND_HF				2
+#define RADIO_BAND_SUB				3

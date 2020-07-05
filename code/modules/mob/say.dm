@@ -112,7 +112,6 @@
   */
 
 /mob/proc/get_message_mode(message)
-//	var/key = message[1] //hopefully we can just inline this without complaint
 	switch(message[1])
 		if("#")
 			return MODE_WHISPER
@@ -124,6 +123,6 @@
 			return MODE_SAYMODE			//MCP
 		if(":")
 			return MODE_HEADSET_SPECIAL	//MCP
-		if(",")
+		if("/")
 			return MODE_STATIC_SPECIAL	//MCP
 #warn TODO SET A SAYMODE THAT MAKES IT SCREAM INTO A RADIO HERE

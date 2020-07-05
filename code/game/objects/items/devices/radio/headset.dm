@@ -20,12 +20,11 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	icon_state = "headset"
 	item_state = "headset"
 	materials = list(/datum/material/iron=75)
-	subspace_transmission = TRUE
+//	subspace_transmission = TRUE
 	canhear_range = 0 // can't hear headsets from very far away
 	var/bang_protect = 0 //this isn't technically clothing so it needs its own bang_protect var
 
 	slot_flags = ITEM_SLOT_EARS
-	var/obj/item/encryptionkey/keyslot2 = null
 	dog_fashion = null
 
 /obj/item/radio/headset/suicide_act(mob/living/carbon/user)

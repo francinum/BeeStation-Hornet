@@ -4,30 +4,55 @@
 	icon = 'icons/obj/radio.dmi'
 	icon_state = "cypherkey"
 	w_class = WEIGHT_CLASS_TINY
-	var/translate_binary = FALSE
+
+
+	//Special Capabilities
+	var/translate_binary = FALSE //AS MUCH AS I'D LOVE TO IMPROVE THIS. I'M NOT TOUCHIN THIS HOT HORSE PISS
 	var/syndie = FALSE
-	var/independent = FALSE
-	var/list/channels = list()
+	//var/independent = FALSE //Outdated
+
+
+	//Generic Capabilities
+	var/frequency		//Raw frequency value to broadcast on, MUST BE INSIDE THE RANGE OF THE BANDCLASS
+	var/bandclass 		//Used to determine if the radio is programmed to a valid frequency for it's band.
+	var/prefix 			//Single-character prefix. Special characters technically allowed.
+	var/output_span		//Visual spanclass, only used by special keys. Custom keys SHOULD NOT be able to have this set for safety reasons.
+	var/output_color	//Overridden by output_span
 
 /obj/item/encryptionkey/Initialize()
 	. = ..()
-	if(!channels.len)
-		desc = "An encryption key for a radio headset.  Has no special codes in it. You should probably tell a coder!"
+	if(!frequency)
+		desc = "An encryption key for a radio headset.  Has no special codes in it."
 
 /obj/item/encryptionkey/examine(mob/user)
 	. = ..()
+
+	. += "<span class='notice'>The text [frequency]://[prefix] is printed on the board.</span>"
+	if(output_span)
+		. += "<span class='nicegreen'>The output is processed by an unmarked, NT branded chip.</span>"
+	else if(output_color)
+		. += "<span class='notice'>The output is processed by a generic color-map chip labeled: [output_color]</span>"
+	else
+		. += "<span class='rose'>The postprocessing pads are not populated.</span>"
+
+	if(translate_binary)
+		. += "<span class='notice'>The encoder chip has been replaced, the new chip has been labeled <span class='italics'>NTSCII LUT v0.1</span>.</span>"
+	/*
 	if(LAZYLEN(channels))
 		var/list/examine_text_list = list()
 		for(var/i in channels)
 			examine_text_list += "[GLOB.channel_tokens[i]] - [lowertext(i)]"
 
 		. += "<span class='notice'>It can access the following channels; [jointext(examine_text_list, ", ")].</span>"
+*/
 
 /obj/item/encryptionkey/syndicate
 	name = "syndicate encryption key"
 	icon_state = "syn_cypherkey"
-	channels = list(RADIO_CHANNEL_SYNDICATE = 1)
-	syndie = TRUE//Signifies that it de-crypts Syndicate transmissions
+	bandclass = RADIO_BAND_SUB
+	frequency = 3002
+	prefix = "t"
+	output_color = "#6d3f40"
 
 /obj/item/encryptionkey/binary
 	name = "binary translator key"
