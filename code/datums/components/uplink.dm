@@ -298,7 +298,9 @@
 	if(istype(parent,/obj/item/pda))
 		return "[rand(100,999)] [pick(GLOB.phonetic_alphabet)]"
 	else if(istype(parent,/obj/item/radio))
-		return sanitize_frequency(rand(MIN_FREQ, MAX_FREQ))
+	#warn removed radio uplink code generation, returning static placeholder value
+		return 1337
+		//return sanitize_frequency(rand(MIN_FREQ, MAX_FREQ))
 	else if(istype(parent,/obj/item/pen))
 		var/list/L = list()
 		for(var/i in 1 to PEN_ROTATIONS)

@@ -12,11 +12,11 @@
 
 	var/obj/item/implant/mindshield/L = new/obj/item/implant/mindshield(H)
 	L.implant(H, null, 1)
-
+/*
 	var/obj/item/radio/R = H.ears
 	R.set_frequency(FREQ_CENTCOM)
 	R.freqlock = TRUE
-
+*/#warn possibly unnecessary frequency locking
 	var/obj/item/card/id/W = H.wear_id
 	if(W)
 		W.registered_name = H.real_name
@@ -366,7 +366,7 @@
 	L.implant(H, null, 1)
 
 	var/obj/item/radio/R = H.ears
-	R.set_frequency(FREQ_CENTCOM)
+	R.set_frequency(RADIO_FREQ_CENTCOM)
 	R.freqlock = TRUE
 
 	var/obj/item/card/id/W = H.wear_id

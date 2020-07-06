@@ -89,7 +89,7 @@ GLOBAL_LIST_EMPTY(all_radios)
 // For information on what objects or departments use what frequencies,
 // see __DEFINES/radio.dm. Mappers may also select additional frequencies for
 // use in maps, such as in intercoms.
-
+/*
 GLOBAL_LIST_INIT(radiochannels, list(
 	RADIO_CHANNEL_COMMON = FREQ_COMMON,
 	RADIO_CHANNEL_SCIENCE = FREQ_SCIENCE,
@@ -121,7 +121,7 @@ GLOBAL_LIST_INIT(reverseradiochannels, list(
 	"[FREQ_CTF_RED]" = RADIO_CHANNEL_CTF_RED,
 	"[FREQ_CTF_BLUE]" = RADIO_CHANNEL_CTF_BLUE
 ))
-
+*/#warn commented out unused global lists
 /datum/radio_frequency
 	var/frequency as num
 	var/list/list/obj/devices = list()

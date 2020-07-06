@@ -199,7 +199,7 @@
 
 				if(href_list["freq"])
 					var/new_frequency = (signaler.frequency + text2num(href_list["freq"]))
-					if(new_frequency < MIN_FREE_FREQ || new_frequency > MAX_FREE_FREQ)
+					if(new_frequency < RADIO_MIDBAND_MIN || new_frequency > RADIO_MIDBAND_MAX)
 						new_frequency = sanitize_frequency(new_frequency)
 					signaler.set_frequency(new_frequency)
 

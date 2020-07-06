@@ -49,7 +49,7 @@
 #define RADIO_CHANNEL_CTF_RED "Red Team"
 #define RADIO_CHANNEL_CTF_BLUE "Blue Team"
 
-
+/*
 #define MIN_FREE_FREQ 1201 // -------------------------------------------------
 // Frequencies are always odd numbers and range from 1201 to 1599.
 
@@ -87,6 +87,54 @@
 #define MAX_FREQ 1489 // ------------------------------------------------------
 
 #define MAX_FREE_FREQ 1599 // -------------------------------------------------
+*/
+
+//Radio Rework frequency defines
+#define RADIO_SPECIAL_MIN 			   1
+
+#define RADIO_FREQ_CTF_RED			  11
+#define RADIO_FREQ_CTF_BLU			  13
+
+#define RADIO_SPECIAL_MAX			 199
+#define RADIO_LOWBAND_MIN			 201
+
+#define RADIO_LOWBAND_MAX			 899
+#define RADIO_MIDBAND_MIN			 901
+
+#define RADIO_FREQ_SUPPLY			 905
+#define RADIO_FREQ_SERVICE			 907
+#define RADIO_FREQ_SCIENCE			 909
+#define RADIO_FREQ_COMMAND			 911
+#define RADIO_FREQ_MEDICAL			 913
+#define RADIO_FREQ_ENGINEERING		 915
+#define RADIO_FREQ_SECURITY			 917
+
+
+#define RADIO_MIDBAND_CIVIL_MIN		1441
+
+#define RADIO_FREQ_AI_PRIVATE		1447
+#define RADIO_FREQ_COMMON			1459
+
+#define RADIO_MIDBAND_CIVIL_MAX		1489
+
+#define RADIO_FREQ_STATUS_DISPLAYS	1493
+
+#define RADIO_MIDBAND_MAX			1999
+#define RADIO_HIFBAND_MIN			2001
+
+#define RADIO_HIFBAND_MAX			2999
+#define RADIO_SUBBAND_MIN			3001
+
+#define RADIO_FREQ_SYNDICATE		3011
+#define RADIO_FREQ_CENTCOM			3013
+
+#define RADIO_SUBBAND_CIVIL_MIN		3999
+
+#define RADIO_FREQ_CARGO_TRUNK		4001
+
+#define RADIO_SUBBAND_CIVIL_MAX		5001
+
+#define RADIO_SUBBAND_MAX			5999
 
 // Transmission types.
 #define TRANSMISSION_WIRE 0  //! some sort of wired connection, not used
