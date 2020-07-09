@@ -57,13 +57,38 @@
 	SEND_SIGNAL(src, COMSIG_RADIO_NEW_FREQUENCY, args)
 	remove_radio(src, frequency)
 	frequency = add_radio(src, new_frequency)
-/*
+
 /obj/item/radio/proc/recalculateChannels()
-	//Regenerate the linked list of prefixes, This optimizes things when it comes to actually sending the message.
+	//Regenerate the assoc list of prefixes, This optimizes things when it comes to actually sending the message.
 	if(default?.loc != src)
 		defaultkey = null //Key removed, Reset default key and beep at the user.
-	prefixes.Cut
-*/#warn have someone look at multidimensional list magic to optimize key selection
+
+	var/prefixes = list() //Empty out the list that we're about to regenerate.
+
+	//Reset special features
+	translate_binary = FALSE
+
+
+	for(var/obj/item/encryptionkey/EK in encryptionkeys)
+		if(!istype(EK))
+			continue
+
+		if(EK.dummy)//Non-radio key
+			//Binary is actually a saymode. We have to set the special feature on the headset.
+			if(translate_binary)
+				translate_binary = TRUE
+
+			continue // Dummy keys don't contain the standard set of variables, only enable special features
+
+		//Access this list via something like: var/channel = prefixes[":b"] as you wish.
+		if(!prefixes[EK.prefix])
+			prefixes[EK.prefix] = list() //Allowing for multiple channels on one key if necessary.
+			prefixes[EK.prefix] += EK//Establish a dict with K=prefix(String), V=encryptionKey(Object)
+			continue
+
+		prefixes[EK.prefix] += EK //Allows you to handle multiple channels on one key as you wish.
+
+
 
 /*
 /obj/item/radio/proc/make_syndie() // Turns normal radios into Syndicate radios!
@@ -270,7 +295,7 @@
 				return
 
 	talk_into(speaker, raw_message, , spans, language=message_language)
-
+/*
 // Checks if this radio can receive on the given frequency.
 /obj/item/radio/proc/can_receive(freq, level)
 	// deny checks
@@ -294,7 +319,7 @@
 			if(GLOB.radiochannels[ch_name] == text2num(freq) || syndie)
 				return TRUE
 	return FALSE
-
+*/#warn can_receive is now handled by the encryption keys.
 
 /obj/item/radio/examine(mob/user)
 	. = ..()

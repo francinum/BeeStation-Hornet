@@ -71,7 +71,7 @@
 /obj/item/radio/intercom/interact(mob/user)
 	..()
 	ui_interact(user, state = GLOB.default_state)
-
+/*
 /obj/item/radio/intercom/can_receive(freq, level)
 	if(!on)
 		return FALSE
@@ -88,7 +88,7 @@
 			return FALSE//Prevents broadcast of messages over devices lacking the encryption
 
 	return TRUE
-
+*/#warn can_receive is now handled by the encryption keys.
 
 /obj/item/radio/intercom/Hear(message, atom/movable/speaker, message_langs, raw_message, radio_freq, list/spans, message_mode)
 	. = ..()

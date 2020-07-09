@@ -65,6 +65,7 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 		return ITALICS | REDUCE_RANGE
 	return ..()
 
+/*
 /obj/item/radio/headset/can_receive(freq, level, AIuser)
 	if(ishuman(src.loc))
 		var/mob/living/carbon/human/H = src.loc
@@ -73,7 +74,7 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	else if(AIuser)
 		return ..(freq, level)
 	return FALSE
-
+*/ #warn can_receive is now handled by the encryption keys.
 /obj/item/radio/headset/ui_data(mob/user)
 	. = ..()
 	.["headset"] = TRUE
@@ -270,42 +271,27 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	return ..(freq, level, TRUE)
 
 /obj/item/radio/headset/attackby(obj/item/W, mob/user, params)
-	user.set_machine(src)
+	//user.set_machine(src) //I hope to god this isn't necessary anymore.
 
 	if(W.tool_behaviour == TOOL_SCREWDRIVER)
-		if(keyslot || keyslot2)
-			for(var/ch_name in channels)
-				SSradio.remove_object(src, GLOB.radiochannels[ch_name])
-				secure_radio_connections[ch_name] = null
-
-			if(keyslot)
-				user.put_in_hands(keyslot)
-				keyslot = null
-			if(keyslot2)
-				user.put_in_hands(keyslot2)
-				keyslot2 = null
-
+		if(encryptionkeys.len)
+			var/selected_key = input(user, "Select a key to remove.", "headset keyslots") as null|anything in encryptionkeys
+			if(!selected_key)
+				return //cancelled
+			user.put_in_hands(selected_key)
+			encryptionkeys -= selected_key
 			recalculateChannels()
-			to_chat(user, "<span class='notice'>You pop out the encryption keys in the headset.</span>")
-
+			to_chat(user, "<span class='notice'>You pop out [selected_key] from the headset.</span>")
 		else
-			to_chat(user, "<span class='warning'>This headset doesn't have any unique encryption keys!  How useless...</span>")
+			to_chat(user, "<span class='warning'>This headset doesn't have any encryption keys!  How useless...</span>")
 
 	else if(istype(W, /obj/item/encryptionkey))
-		if(keyslot && keyslot2)
-			to_chat(user, "<span class='warning'>The headset can't hold another key!</span>")
+		if(encryptionkeys.len >= max_keys)
+			to_chat(user, "<span class='warning'>The headset can't hold any more keys!</span>")
 			return
-
-		if(!keyslot)
-			if(!user.transferItemToLoc(W, src))
-				return
-			keyslot = W
-
-		else
-			if(!user.transferItemToLoc(W, src))
-				return
-			keyslot2 = W
-
+		if(!user.transferItemToLoc(W, src))
+			return
+		encryptionkeys += W
 
 		recalculateChannels()
 	else
