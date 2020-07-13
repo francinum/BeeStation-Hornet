@@ -106,9 +106,9 @@
   * #  - WHISPER
   * %  - SING
   * ;  - HEADSET DEFAULT
-  * ?  - SPECIAL CHANNELS
+  * (? - /) - SPECIAL CHANNELS
   * :x - USE PERSONAL RADIOS
-  * ,x - USE STATIC RADIO SPECIAL CHANNELS
+  * .x - USE STATIC RADIO SPECIAL CHANNELS
   */
 
 /mob/proc/get_message_mode(message)
@@ -119,7 +119,7 @@
 			return MODE_SING
 		if(";")
 			return MODE_HEADSET
-		if("?")
+		if("?", "-", "/")
 			return MODE_SAYMODE			//MCP
 		if(":")
 			return MODE_HEADSET_SPECIAL	//MCP
