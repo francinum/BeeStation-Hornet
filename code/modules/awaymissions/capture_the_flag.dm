@@ -541,7 +541,7 @@
 /datum/outfit/ctf/blue/post_equip(mob/living/carbon/human/H)
 	..()
 	var/obj/item/radio/R = H.ears
-	R.set_frequency(RADIO_FREQ_CTF_BLUE)
+	R.set_frequency(RADIO_FREQ_CTF_BLU)
 	R.freqlock = TRUE
 	R.independent = TRUE
 	H.dna.species.stunmod = 0

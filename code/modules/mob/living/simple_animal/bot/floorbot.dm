@@ -10,7 +10,7 @@
 	maxHealth = 25
 	spacewalk = TRUE
 
-	radio_key = /obj/item/encryptionkey/headset_eng
+	radio_key = /obj/item/encryptionkey/medium/engineering
 	radio_channel = RADIO_CHANNEL_ENGINEERING
 	bot_type = FLOOR_BOT
 	model = "Floorbot"

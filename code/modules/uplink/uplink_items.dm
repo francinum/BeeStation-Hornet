@@ -1001,7 +1001,7 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 	item = /obj/item/deployablemine/traitor
 	cost = 4
 	include_modes = list(/datum/game_mode/nuclear/clown_ops)
-	
+
 /datum/uplink_item/explosives/virus_grenade
 	name = "Fungal Tuberculosis Grenade"
 	desc = "A primed bio-grenade packed into a compact box. Comes with five Bio Virus Antidote Kit (BVAK) \
@@ -1347,7 +1347,7 @@ datum/uplink_item/stealthy_tools/taeclowndo_shoes
 	desc = "A key that, when inserted into a radio headset, allows you to listen to and talk with silicon-based lifeforms, \
 			such as AI units and cyborgs, over their private binary channel. Caution should \
 			be taken while doing this, as unless they are allied with you, they are programmed to report such intrusions."
-	item = /obj/item/encryptionkey/binary
+	item = /obj/item/encryptionkey/dummy/binary
 	cost = 4
 	surplus = 75
 	restricted = TRUE
@@ -1534,7 +1534,7 @@ datum/uplink_item/stealthy_tools/taeclowndo_shoes
 	name = "Syndicate Encryption Key"
 	desc = "A key that, when inserted into a radio headset, allows you to listen to all station department channels \
 			as well as talk on an encrypted Syndicate channel with other agents that have the same key."
-	item = /obj/item/encryptionkey/syndicate
+	item = /obj/item/encryptionkey/subspace/syndicate
 	cost = 2
 	surplus = 75
 	restricted = TRUE

@@ -17,7 +17,7 @@ GLOBAL_VAR(medibot_unique_id_gen)
 
 	status_flags = (CANPUSH | CANSTUN)
 
-	radio_key = /obj/item/encryptionkey/headset_med
+	radio_key = /obj/item/encryptionkey/medium/medical
 	radio_channel = RADIO_CHANNEL_MEDICAL
 
 	bot_type = MED_BOT
@@ -306,7 +306,7 @@ GLOBAL_VAR(medibot_unique_id_gen)
 	//Time to see if they need medical help!
 	if(C.stat == DEAD || (HAS_TRAIT(C, TRAIT_FAKEDEATH)))
 		return FALSE	//welp too late for them!
-	
+
 	var/can_inject = FALSE
 	for(var/X in C.bodyparts)
 		var/obj/item/bodypart/part = X

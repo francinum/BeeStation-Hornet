@@ -43,7 +43,8 @@
 	if(visualsOnly)
 		return
 	var/obj/item/radio/R = H.ears
-	R.keyslot = new /obj/item/encryptionkey/heads/captain
+	//R.keyslot = new /obj/item/encryptionkey/heads/captain
+	#warn ERT commander post-equip needs captain set of keys.
 	R.recalculateChannels()
 
 /datum/outfit/ert/commander/alert
@@ -77,7 +78,8 @@
 		return
 
 	var/obj/item/radio/R = H.ears
-	R.keyslot = new /obj/item/encryptionkey/heads/hos
+	//R.keyslot = new /obj/item/encryptionkey/heads/hos
+	#warn secert headset
 	R.recalculateChannels()
 
 /datum/outfit/ert/security/alert
@@ -113,7 +115,8 @@
 		return
 
 	var/obj/item/radio/R = H.ears
-	R.keyslot = new /obj/item/encryptionkey/heads/cmo
+	//R.keyslot = new /obj/item/encryptionkey/heads/cmo
+	#warn medert headset
 	R.recalculateChannels()
 
 /datum/outfit/ert/medic/alert
@@ -149,7 +152,8 @@
 		return
 
 	var/obj/item/radio/R = H.ears
-	R.keyslot = new /obj/item/encryptionkey/heads/ce
+	//R.keyslot = new /obj/item/encryptionkey/heads/ce
+	#warn engert headset
 	R.recalculateChannels()
 
 /datum/outfit/ert/engineer/alert
@@ -234,7 +238,8 @@
 		return
 
 	var/obj/item/radio/R = H.ears
-	R.keyslot = new /obj/item/encryptionkey/heads/hop
+	//R.keyslot = new /obj/item/encryptionkey/heads/hop
+	#warn jesus ert has a hopset apparently??
 	R.recalculateChannels()
 
 /datum/outfit/ert/chaplain
@@ -290,7 +295,8 @@
 		return
 
 	var/obj/item/radio/R = H.ears
-	R.keyslot = new /obj/item/encryptionkey/headset_service
+	#warn janert headset
+	//R.keyslot = new /obj/item/encryptionkey/headset_service
 	R.recalculateChannels()
 
 /datum/outfit/ert/janitor/heavy

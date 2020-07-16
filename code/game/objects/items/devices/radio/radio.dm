@@ -267,12 +267,12 @@
 			if(!default)
 				#warn put the warn about a missing default channel here
 			#warn put the send_to_encryption call here
-		if(MODE_HEADSET_SPECIAL)
-			//This stuff is temporary and will eventually be taken out back and shot.
-			var/list/prefixedkeys = list()
-			for(obj/item/encryptionkey/ec in encryptionkeys)
-				if(ec.prefix == radio_prefix)
-					prefixedkeys += ec
+		if(MODE_HEADSET_SPECIAL)//Attempt to use a key directly.
+			if(!radio_prefix || !prefixes[radio_prefix]) //Either we provided no prefix?? or there's no valid keys.
+				return
+			//Our prefix is valid and we have at least one key that uses it.
+			for(var/obj/item/encryptionkey/EK in prefixes[radio_prefix])
+				voice_input(M, message, spans, language, use_command)
 
 
 

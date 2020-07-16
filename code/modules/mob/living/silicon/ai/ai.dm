@@ -678,7 +678,7 @@
 		M.emotion = emote
 		M.update()
 	if (emote == "Friend Computer")
-		var/datum/radio_frequency/frequency = SSradio.return_frequency(FREQ_STATUS_DISPLAYS)
+		var/datum/radio_frequency/frequency = SSradio.return_frequency(RADIO_FREQ_STATUS_DISPLAYS)
 
 		if(!frequency)
 			return

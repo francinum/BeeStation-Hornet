@@ -12,7 +12,7 @@
 	environment_smash = ENVIRONMENT_SMASH_WALLS //Walls can't stop THE LAW
 	mob_size = MOB_SIZE_LARGE
 
-	radio_key = /obj/item/encryptionkey/headset_sec
+	radio_key = /obj/item/encryptionkey/medium/security
 	radio_channel = RADIO_CHANNEL_SECURITY
 	bot_type = SEC_BOT
 	model = "ED-209"

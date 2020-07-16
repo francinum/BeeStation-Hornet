@@ -231,7 +231,7 @@ SUBSYSTEM_DEF(shuttle)
 		else
 			emergency.request(null, signal_origin, html_decode(emergency_reason), 0)
 
-	var/datum/radio_frequency/frequency = SSradio.return_frequency(FREQ_STATUS_DISPLAYS)
+	var/datum/radio_frequency/frequency = SSradio.return_frequency(RADIO_FREQ_STATUS_DISPLAYS)
 
 	if(!frequency)
 		return

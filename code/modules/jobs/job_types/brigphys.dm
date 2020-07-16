@@ -29,7 +29,8 @@
 	jobtype = /datum/job/brig_phys
 
 	belt = /obj/item/pda/security
-	ears = /obj/item/radio/headset/headset_medsec
+	//ears = /obj/item/radio/headset/headset_medsec
+	#warn brigphys headset needs to be reimplimented
 	uniform = /obj/item/clothing/under/rank/brig_phys
 	shoes = /obj/item/clothing/shoes/sneakers/white
 	glasses = /obj/item/clothing/glasses/hud/health/sunglasses

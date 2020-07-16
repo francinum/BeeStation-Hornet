@@ -36,15 +36,18 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 
 	if(item_flags & IN_INVENTORY && loc == user)
 		// construction of frequency description
-		var/list/avail_chans = list("Use [RADIO_KEY_COMMON] for the currently tuned frequency")
+		var/list/avail_chans = list()
+		if(defaultkey)
+			avail_chans += "The default prefix ; will currently broadcast on [defaultkey.frequency/10]"
 		if(translate_binary)
-			avail_chans += "use [MODE_TOKEN_BINARY] for [MODE_BINARY]"
-		if(length(channels))
-			for(var/i in 1 to length(channels))
-				if(i == 1)
-					avail_chans += "use [MODE_TOKEN_DEPARTMENT] or [GLOB.channel_tokens[channels[i]]] for [lowertext(channels[i])]"
-				else
-					avail_chans += "use [GLOB.channel_tokens[channels[i]]] for [lowertext(channels[i])]"
+			avail_chans += "use ?b for Binary"
+		for(var/obj/item/encryptionkey/key in encryptionkeys)
+			if(!istype(key))
+				continue
+			if(key.dummy)
+				continue
+			avail_chans += "use :[key.prefix] for [key.frequency]"
+			#warn consider adding a 'channel name' string to keys for this.
 		. += "<span class='notice'>A small screen on the headset displays the following available frequencies:\n[english_list(avail_chans)].</span>"
 
 		if(command)
@@ -94,27 +97,27 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 
 /obj/item/radio/headset/syndicate/Initialize()
 	. = ..()
-	make_syndie()
-
+//	make_syndie()
+#warn make_syndicate init
 /obj/item/radio/headset/binary
+
 /obj/item/radio/headset/binary/Initialize()
 	. = ..()
-	qdel(keyslot)
-	keyslot = new /obj/item/encryptionkey/binary
+	encryptionkeys += new /obj/item/encryptionkey/dummy/binary
 	recalculateChannels()
 
 /obj/item/radio/headset/headset_sec
 	name = "security radio headset"
 	desc = "This is used by your elite security force."
 	icon_state = "sec_headset"
-	keyslot = new /obj/item/encryptionkey/headset_sec
-
+	encryptionkeys = list(new /obj/item/encryptionkey/medium/security)
+/*
 /obj/item/radio/headset/headset_medsec
 	name = "medical-security radio headset"
 	desc = "Used to hear how many security officers need to be stiched back together."
 	icon_state = "medsec_headset"
 	keyslot = new /obj/item/encryptionkey/headset_medsec
-
+*/#warn medical department headset
 /obj/item/radio/headset/headset_sec/alt
 	name = "security bowman headset"
 	desc = "This is used by your elite security force. Protects ears from flashbangs."
@@ -126,47 +129,49 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	name = "engineering radio headset"
 	desc = "When the engineers wish to chat like girls."
 	icon_state = "eng_headset"
-	keyslot = new /obj/item/encryptionkey/headset_eng
+	encryptionkeys = list(new /obj/item/encryptionkey/medium/engineering)
 
 /obj/item/radio/headset/headset_rob
 	name = "robotics radio headset"
 	desc = "Made specifically for the roboticists, who cannot decide between departments."
 	icon_state = "rob_headset"
-	keyslot = new /obj/item/encryptionkey/headset_rob
+	encryptionkeys = list(new /obj/item/encryptionkey/medium/science, new /obj/item/encryptionkey/medium/engineering)
 
 /obj/item/radio/headset/headset_med
 	name = "medical radio headset"
 	desc = "A headset for the trained staff of the medbay."
 	icon_state = "med_headset"
-	keyslot = new /obj/item/encryptionkey/headset_med
+	encryptionkeys = list(new /obj/item/encryptionkey/medium/medical)
 
 /obj/item/radio/headset/headset_sci
 	name = "science radio headset"
 	desc = "A sciency headset. Like usual."
 	icon_state = "sci_headset"
-	keyslot = new /obj/item/encryptionkey/headset_sci
+	encryptionkeys = list(new /obj/item/encryptionkey/medium/science)
 
 /obj/item/radio/headset/headset_medsci
 	name = "medical research radio headset"
 	desc = "A headset that is a result of the mating between medical and science."
 	icon_state = "medsci_headset"
-	keyslot = new /obj/item/encryptionkey/headset_medsci
+	encryptionkeys = list(new /obj/item/encryptionkey/medium/medical, new /obj/item/encryptionkey/medium/science)
 
 /obj/item/radio/headset/headset_srvsec
 	name = "law and order headset"
 	desc = "In the criminal justice headset, the encryption key represents two separate but equally important groups. Sec, who investigate crime, and Service, who provide services. These are their comms."
 	icon_state = "srvsec_headset"
-	keyslot = new /obj/item/encryptionkey/headset_srvsec
+	encryptionkeys = list(new /obj/item/encryptionkey/medium/service, new /obj/item/encryptionkey/medium/security)
 
 /obj/item/radio/headset/headset_com
 	name = "command radio headset"
 	desc = "A headset with a commanding channel."
 	icon_state = "com_headset"
-	keyslot = new /obj/item/encryptionkey/headset_com
+	encryptionkeys = list(new /obj/item/encryptionkey/medium/command)
 
 /obj/item/radio/headset/heads
 	command = TRUE
 
+#warn oh god the captain's going to need to have some special bullshit for all his fucking keys good fuck, not doing that right now
+/*
 /obj/item/radio/headset/heads/captain
 	name = "\proper the captain's headset"
 	desc = "The headset of the king."
@@ -216,55 +221,55 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	desc = "The headset of the guy who will one day be captain."
 	icon_state = "com_headset"
 	keyslot = new /obj/item/encryptionkey/heads/hop
-
+*/
 /obj/item/radio/headset/headset_cargo
 	name = "supply radio headset"
 	desc = "A headset used by the QM and his slaves."
 	icon_state = "cargo_headset"
-	keyslot = new /obj/item/encryptionkey/headset_cargo
+	encryptionkeys = list(new /obj/item/encryptionkey/medium/supply)
 
 /obj/item/radio/headset/headset_cargo/mining
 	name = "mining radio headset"
 	desc = "Headset used by shaft miners."
 	icon_state = "mine_headset"
-	keyslot = new /obj/item/encryptionkey/headset_mining
+	encryptionkeys = list(new /obj/item/encryptionkey/medium/science, new /obj/item/encryptionkey/medium/supply)
 
 /obj/item/radio/headset/headset_srv
 	name = "service radio headset"
 	desc = "Headset used by the service staff, tasked with keeping the station full, happy and clean."
 	icon_state = "srv_headset"
-	keyslot = new /obj/item/encryptionkey/headset_service
+	encryptionkeys = list(new /obj/item/encryptionkey/medium_service)
 
 /obj/item/radio/headset/headset_cent
 	name = "\improper CentCom headset"
 	desc = "A headset used by the upper echelons of Nanotrasen."
 	icon_state = "cent_headset"
-	keyslot = new /obj/item/encryptionkey/headset_com
-	keyslot2 = new /obj/item/encryptionkey/headset_cent
+	encryptionkeys = list(new /obj/item/encryptionkey/medium/command, new /obj/item/encryptionkey/subspace/centcom)
 
 /obj/item/radio/headset/headset_cent/empty
-	keyslot = null
-	keyslot2 = null
+	encryptionkeys = null
 
+#warn centcom commander headset needs captain key
 /obj/item/radio/headset/headset_cent/commander
-	keyslot = new /obj/item/encryptionkey/heads/captain
+//	keyslot = new /obj/item/encryptionkey/heads/captain
+	encryptionkeys = list(new /obj/item/encryptionkey/subspace/centcom)
 
 /obj/item/radio/headset/headset_cent/alt
 	name = "\improper CentCom bowman headset"
 	desc = "A headset especially for emergency response personnel. Protects ears from flashbangs."
 	icon_state = "cent_headset_alt"
 	item_state = "cent_headset_alt"
-	keyslot = null
+	encryptionkeys = null
 	bang_protect = 1
 
 /obj/item/radio/headset/silicon/pai
 	name = "\proper mini Integrated Subspace Transceiver "
 	subspace_transmission = FALSE
 
-
+#warn AI headset crap
 /obj/item/radio/headset/silicon/ai
 	name = "\proper Integrated Subspace Transceiver "
-	keyslot2 = new /obj/item/encryptionkey/ai
+//	keyslot2 = new /obj/item/encryptionkey/ai
 	command = TRUE
 
 /obj/item/radio/headset/silicon/can_receive(freq, level)
@@ -297,7 +302,8 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	else
 		return ..()
 
-
+#warn hopefully I don't need any of this at this level anymore.
+/*
 /obj/item/radio/headset/recalculateChannels()
 	..()
 	if(keyslot2)
@@ -314,7 +320,7 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 
 	for(var/ch_name in channels)
 		secure_radio_connections[ch_name] = add_radio(src, GLOB.radiochannels[ch_name])
-
+*/
 /obj/item/radio/headset/AltClick(mob/living/user)
 	if(!istype(user) || !Adjacent(user) || user.incapacitated())
 		return
