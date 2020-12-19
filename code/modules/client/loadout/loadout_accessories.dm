@@ -37,15 +37,22 @@
 	cost = 1200
 
 //armbands
-/datum/gear/accessory/armband_red
+/datum/gear/accessory/armband
+	subtype_path = /datum/gear/accessory/armband
+	cost = 1000
+
+/datum/gear/accessory/armband/red
+	display_name = "armband, red"
 	path = /obj/item/clothing/accessory/armband
 	cost = 1000
 
-/datum/gear/accessory/armband_blu
+/datum/gear/accessory/armband/blue
+	display_name = "armband, blue"
 	path = /obj/item/clothing/accessory/armband/blue
 	cost = 1000
 
-/datum/gear/accessory/armband_grn
+/datum/gear/accessory/armband/green
+	display_name = "armband, green"
 	path = /obj/item/clothing/accessory/armband/green
 	cost = 1000
 
